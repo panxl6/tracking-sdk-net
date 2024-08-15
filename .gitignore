@@ -1,0 +1,7 @@
+.idea/
+.vs/
+src/Tracking/Test/
+src/Tracking/Tracking/bin/
+src/Tracking/Tracking/obj/
+Tracking.sln.DotSettings.user
+.DS_Store
