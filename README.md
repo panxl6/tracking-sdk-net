@@ -305,7 +305,7 @@ Console.WriteLine(resp.Slug);
 
 ```csharp
 Notification notification =  client.Notification.GetNotificationByTrackingId("<tracking_id>");
-Console.WriteLine(notificaiton.Emails[0]);
+Console.WriteLine(notification.Emails[0]);
 ```
 
 **POST** /notifications/:id/add
@@ -318,8 +318,8 @@ notification.Emails = new string?[] { "<your_email>" };
 request.Notification = notification;
 options.AddNotificationByTrackingIdRequest = request;
 
-Notification notification = client.Notification.AddNotificationByTrackingId("<tracking_id>", options);
-Console.WriteLine(notification.Emails[0]);
+Notification result = client.Notification.AddNotificationByTrackingId("<tracking_id>", options);
+Console.WriteLine(result.Emails[0]);
 ```
 
 **POST** /notifications/:id/remove
@@ -332,8 +332,8 @@ notification.Emails = new string?[] { "<your_email>" };
 request.Notification = notification;
 options.DeleteNotificationByTrackingIdRequest = request;
 
-Notification notification = client.Notification.DeleteNotificationByTrackingId("<tracking_id>", options);
-Console.WriteLine(notification.Emails[0]);
+Notification result = client.Notification.DeleteNotificationByTrackingId("<tracking_id>", options);
+Console.WriteLine(result.Emails[0]);
 ```
 
 ### /estimated-delivery-date
