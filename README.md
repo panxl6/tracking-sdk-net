@@ -27,6 +27,7 @@ If you need support using AfterShip products, please contact support@aftership.c
   - [Help](#help)
   - [License](#license)
 
+
 ## Before you begin
 
 Before you begin to integrate:
@@ -38,17 +39,16 @@ Before you begin to integrate:
 ## Quick Start
 
 ### Installation
-
 Using the [.NET Core command-line interface (CLI) tools]:
 
 ```sh
-dotnet add package Aftership
+dotnet add package AfterShipTracking
 ```
 
 Using the [NuGet Command Line Interface (CLI)]:
 
 ```sh
-nuget install Aftership
+nuget install AfterShipTracking
 ```
 
 From within Visual Studio:
@@ -56,35 +56,35 @@ From within Visual Studio:
 1. Open the Solution Explorer.
 2. Right-click on a project within your solution.
 3. Click on *Manage NuGet Packages...*
-4. Click on the *Browse* tab and search for "Aftership".
-5. Click on the Aftership package, select the appropriate version in the
+4. Click on the *Browse* tab and search for "AfterShipTracking".
+5. Click on the Tracking package, select the appropriate version in the
    right-tab and click *Install*.
 
 For with Visual Studio Code:
+1. Open the Command Palette then type "NuGet Package Manager"
+2. In the opened window, search for "AfterShipTracking".
+3. Select the AfterShipTracking package and the package version.
 
-1. Open the Command Palette then type “NuGet Package Manager“
-2. In the opened window, search for "Aftership".
-3. Select the Aftership package and the package version.
 
 ## Constructor
 
 Create AfterShip instance with options
 
-| Name       | Type   | Required | Description                                                                                                                                                                                                               |
-|------------|--------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| api_key    | string | ✔        | Your AfterShip API key                                                                                                                                                                                                    |
-| auth_type  | enum   |          | Default value: `AfterShipConfiguration.AUTHENTICATION_TYPE_API_KEY` <br > AES authentication: `AfterShipConfiguration.AUTHENTICATION_TYPE_AES` <br > RSA authentication: `AfterShipConfiguration.AUTHENTICATION_TYPE_RSA` |
-| api_secret | string |          | Required if the authentication type is `AfterShipConfiguration.AUTHENTICATION_TYPE_AES` or `AfterShipConfiguration.AUTHENTICATION_TYPE_RSA`                                                                               |
-| domain     | string |          | AfterShip API domain. Default value: https://api.aftership.com                                                                                                                                                            |
-| user_agent | string |          | User-defined user-agent string, please follow [RFC9110](https://www.rfc-editor.org/rfc/rfc9110#field.user-agent) format standard.                                                                                         |
-| proxy      | string |          | HTTP proxy URL to use for requests. <br > Default value: `null` <br > Example: `http://192.168.0.100:8888`                                                                                                                |
-| max_retry  | number |          | Number of retries for each request. Default value: 2. Min is 0, Max is 10.                                                                                                                                                |
-| timeout    | number |          | Timeout for each request in milliseconds.                                                                                                                                                                                 |
+| Name       | Type   | Required | Description                                                                                                                       |
+| ---------- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| api_key    | string | ✔        | Your AfterShip API key                                                                                                            |
+| auth_type  | enum   |          | Default value: `AfterShipConfiguration.AUTHENTICATION_TYPE_API_KEY` <br > AES authentication: `AfterShipConfiguration.AUTHENTICATION_TYPE_AES` <br > RSA authentication: `AfterShipConfiguration.AUTHENTICATION_TYPE_RSA`               |
+| api_secret | string |          | Required if the authentication type is `AfterShipConfiguration.AUTHENTICATION_TYPE_AES` or `AfterShipConfiguration.AUTHENTICATION_TYPE_RSA`                                                           |
+| domain     | string |          | AfterShip API domain. Default value: https://api.aftership.com                                                                    |
+| user_agent | string |          | User-defined user-agent string, please follow [RFC9110](https://www.rfc-editor.org/rfc/rfc9110#field.user-agent) format standard. |
+| proxy      | string |          | HTTP proxy URL to use for requests. <br > Default value: `null` <br > Example: `http://192.168.0.100:8888`                        |
+| max_retry  | number |          | Number of retries for each request. Default value: 2. Min is 0, Max is 10.                                                        |
+| timeout    | number |          | Timeout for each request in milliseconds.                                                                                         |
 
 ### Example
 
 ```csharp
-using Tracking;
+using AfterShipTracking;
 
 class Program
 {
@@ -103,7 +103,7 @@ class Program
             newTracking.TrackingNumber = "<tracking_number>";
             newTracking.Slug = "<slug>";
             options.CreateTrackingRequest.Tracking = newTracking;
-            Tracking.Tracking tracking = client.Tracking.CreateTracking(options);
+            Tracking tracking = client.Tracking.CreateTracking(options);
             if (tracking != null)
             {
                 Console.WriteLine(tracking.Id);
@@ -118,25 +118,25 @@ class Program
 
 ## Rate Limiter
 
-See the [Rate Limit](https://www.aftership.com/docs/tracking/2024-04/quickstart/rate-limit) to understand the AfterShip
-rate limit policy.
+See the [Rate Limit](https://www.aftership.com/docs/tracking/2024-04/quickstart/rate-limit) to understand the AfterShip rate limit policy.
 
 ## Error Handling
 
 The SDK will return an error object when there is any error during the request, with the following specification:
 
 | Name          | Type   | Description                    |
-|---------------|--------|--------------------------------|
+| ------------- | ------ | ------------------------------ |
 | message       | string | Detail message of the error    |
 | code          | enum   | Error code enum for API Error. |
 | meta_code     | number | API response meta code.        |
 | status_code   | number | HTTP status code.              |
 | response_body | string | API response body.             |
 
+
 ### Error List
 
 | code                              | meta_code       | status_code     | message                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-|-----------------------------------|-----------------|-----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| --------------------------------- | --------------- | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | INVALID_REQUEST                   | 400             | 400             | The request was invalid or cannot be otherwise served.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | INVALID_JSON                      | 4001            | 400             | Invalid JSON data.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | TRACKING_ALREADY_EXIST            | 4003            | 400             | Tracking already exists.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
@@ -170,23 +170,19 @@ The AfterShip instance has the following properties which are exactly the same a
 - notification - Get, add or remove contacts (sms or email) to be notified when the status of a tracking has changed.
 - estimated-delivery-date - Get estimated delivery date for your order.
 
+
 ### /trackings
 
 **POST** /trackings
 
 ```csharp
-AfterShipClient client = new AfterShipClient(
-                            apiKey: "YOUR_API_KEY",
-                            apiSecret: "YOUR_AES_SECRET",
-                            authenticationType: AfterShipConfiguration.AUTHENTICATION_TYPE_AES);
-
 CreateTrackingOptions options = new CreateTrackingOptions();
 options.CreateTrackingRequest = new CreateTrackingRequest();
 TrackingCreateTrackingRequest newTracking = new TrackingCreateTrackingRequest();
 newTracking.TrackingNumber = "<tracking_number>";
 newTracking.Slug = "<slug>";
 options.CreateTrackingRequest.Tracking = newTracking;
-Tracking.Tracking tracking = client.Tracking.CreateTracking(options);
+Tracking tracking = client.Tracking.CreateTracking(options);
 if (tracking != null)
 {
     Console.WriteLine(tracking.Id);
@@ -196,7 +192,6 @@ if (tracking != null)
 **DELETE** /trackings/:id
 
 ```csharp
-AfterShipClient client = new AfterShipClient(apiKey: "YOUR_API_KEY");
 DeleteTrackingByIdOptions deleteOptions = new DeleteTrackingByIdOptions();
 PartialDeleteTracking resp = client.Tracking.DeleteTrackingById("<tracking_id>");
 
@@ -209,25 +204,23 @@ if (resp != null)
 **GET** /trackings
 
 ```csharp
-  AfterShipClient client = new AfterShipClient(apiKey: "YOUR_API_KEY");
-  GetTrackingsOptions options = new GetTrackingsOptions();
-  options.Keyword = "test";
-  GetTrackingsResponseTrackingListData trackingsData = client.Tracking.GetTrackings(options);
-  if (trackingsData != null && trackingsData.Trackings != null)
-  {
-      for (int i = 0; i < trackingsData.Trackings.Length; i++)
-      {
-          Console.WriteLine(trackingsData.Trackings[i].TrackingNumber);
-      }
-  }
+GetTrackingsOptions options = new GetTrackingsOptions();
+options.Keyword = "test";
+GetTrackingsResponseTrackingListData trackingsData = client.Tracking.GetTrackings(options);
+if (trackingsData != null && trackingsData.Trackings != null)
+{
+    for (int i = 0; i < trackingsData.Trackings.Length; i++)
+    {
+        Console.WriteLine(trackingsData.Trackings[i].TrackingNumber);
+    }
+}
 ```
 
 **GET** /trackings/:id
 
 ```csharp
-AfterShipClient client = new AfterShipClient(apiKey: "YOUR_API_KEY");
-Tracking.Tracking t = client.Tracking.GetTrackingById("<tracking_id>");
-if (t != null)
+Tracking tracking = client.Tracking.GetTrackingById("<tracking_id>");
+if (tracking != null)
 {
    Console.WriteLine(tracking.TrackingNumber);
 }
@@ -236,14 +229,13 @@ if (t != null)
 **PUT** /trackings/:id
 
 ```csharp
-AfterShipClient client = new AfterShipClient(apiKey: "YOUR_API_KEY");
 UpdateTrackingByIdOptions updateOptions = new UpdateTrackingByIdOptions();
 updateOptions.UpdateTrackingByIdRequest = new UpdateTrackingByIdRequest();
 TrackingUpdateTrackingByIdRequest trackingToUpdate = new TrackingUpdateTrackingByIdRequest();
 trackingToUpdate.Title = "this is a test new title";
 trackingToUpdate.Note = "some note";
 updateOptions.UpdateTrackingByIdRequest.Tracking = trackingToUpdate;
-Tracking.Tracking tracking = client.Tracking.UpdateTrackingById("<tracking_id>", updateOptions);
+Tracking tracking = client.Tracking.UpdateTrackingById("<tracking_id>", updateOptions);
 
 if (tracking != null)
 {
@@ -255,7 +247,6 @@ if (tracking != null)
 **POST** /trackings/:id/retrack
 
 ```csharp
-AfterShipClient client = new AfterShipClient(apiKey: "YOUR_API_KEY");
 RetrackTrackingByIdOptions options = new RetrackTrackingByIdOptions();
 PartialUpdateTracking tracking = client.Tracking.RetrackTrackingById("<tracking_id>");
 Console.WriteLine(tracking.TrackingNumber);
@@ -264,25 +255,23 @@ Console.WriteLine(tracking.TrackingNumber);
 **POST** /trackings/:id/mark-as-completed
 
 ```csharp
-AfterShipClient client = new AfterShipClient(apiKey: "YOUR_API_KEY");
 MarkTrackingCompletedByIdOptions options = new MarkTrackingCompletedByIdOptions();
 PartialUpdateTracking tracking = client.Tracking.RetrackTrackingById("<tracking_id>");
 Console.WriteLine(tracking.TrackingNumber);
 ```
 
 ### /couriers
-
 **GET** /couriers
 
 ```csharp
-GetUserCouriersResponse response = CourierResource.getUserCouriers().fetch();
-System.out.println(response.getTotal());
+GetUserCouriersOptions options = new GetUserCouriersOptions();
+GetUserCouriersResponse resp = client.Courier.GetUserCouriers(options);
+Console.WriteLine(resp.Total);
 ```
 
 **GET** /couriers/all
 
 ```csharp
-AfterShipClient client = new AfterShipClient(apiKey: "YOUR_API_KEY");
 GetAllCouriersOptions options = new GetAllCouriersOptions();
 GetAllCouriersResponse resp = client.Courier.GetAllCouriers(options);
 Console.WriteLine(resp.Total);
@@ -291,10 +280,12 @@ Console.WriteLine(resp.Total);
 **POST** /couriers/detect
 
 ```csharp
-AfterShipClient client = new AfterShipClient(apiKey: "YOUR_API_KEY");
 DetectCourierOptions options = new DetectCourierOptions();
-TrackingDetectCourierRequest request = new TrackingDetectCourierRequest();
-request.TrackingNumber = "<tracking_number>";
+DetectCourierRequest detectCourierRequest = new DetectCourierRequest();
+TrackingDetectCourierRequest tracking = new TrackingDetectCourierRequest();
+tracking.TrackingNumber = "<tracking_number>";
+detectCourierRequest.Tracking = tracking;
+options.DetectCourierRequest = detectCourierRequest;
 DetectCourierResponse resp = client.Courier.DetectCourier(options);
 Console.WriteLine(resp.Total);
 ```
@@ -304,7 +295,6 @@ Console.WriteLine(resp.Total);
 **GET** /last_checkpoint/:id
 
 ```csharp
-AfterShipClient client = new AfterShipClient(apiKey: "YOUR_API_KEY");
 GetCheckpointByTrackingIdResponse resp = client.LastCheckpoint.GetCheckpointByTrackingId("<tracking_id>");
 Console.WriteLine(resp.Slug);
 ```
@@ -314,39 +304,36 @@ Console.WriteLine(resp.Slug);
 **GET** /notifications/:id
 
 ```csharp
-AfterShipClient client = new AfterShipClient(apiKey: "YOUR_API_KEY");
-Notification notificaiton =  client.Notification.GetNotificationByTrackingId("<tracking_id>");
-Console.WriteLine(notificaiton.Emails);
+Notification notification =  client.Notification.GetNotificationByTrackingId("<tracking_id>");
+Console.WriteLine(notificaiton.Emails[0]);
 ```
 
 **POST** /notifications/:id/add
 
 ```csharp
-AfterShipClient client = new AfterShipClient(apiKey: "YOUR_API_KEY");
-
 AddNotificationByTrackingIdOptions options = new AddNotificationByTrackingIdOptions();
 AddNotificationByTrackingIdRequest request = new AddNotificationByTrackingIdRequest();
 NotificationRequestV1 notification = new NotificationRequestV1();
+notification.Emails = new string?[] { "<your_email>" };
 request.Notification = notification;
 options.AddNotificationByTrackingIdRequest = request;
 
-Notification notificaiton = client.Notification.AddNotificationByTrackingId("<tracking_id>", options);
-Console.WriteLine(notificaiton.Emails);
+Notification notification = client.Notification.AddNotificationByTrackingId("<tracking_id>", options);
+Console.WriteLine(notification.Emails[0]);
 ```
 
 **POST** /notifications/:id/remove
 
 ```csharp
-AfterShipClient client = new AfterShipClient(apiKey: "YOUR_API_KEY");
-
 DeleteNotificationByTrackingIdOptions options = new DeleteNotificationByTrackingIdOptions();
 DeleteNotificationByTrackingIdRequest request = new DeleteNotificationByTrackingIdRequest();
 NotificationRequestV1 notification = new NotificationRequestV1();
+notification.Emails = new string?[] { "<your_email>" };
 request.Notification = notification;
 options.DeleteNotificationByTrackingIdRequest = request;
 
-Notification notificaiton = client.Notification.DeleteNotificationByTrackingId("<tracking_id>", options);
-Console.WriteLine(notificaiton.Emails);
+Notification notification = client.Notification.DeleteNotificationByTrackingId("<tracking_id>", options);
+Console.WriteLine(notification.Emails[0]);
 ```
 
 ### /estimated-delivery-date
@@ -354,31 +341,42 @@ Console.WriteLine(notificaiton.Emails);
 **POST** /estimated-delivery-date/predict-batch
 
 ```csharp
-AfterShipClient client = new AfterShipClient(apiKey: "YOUR_API_KEY");
-
 PredictBatchOptions options = new PredictBatchOptions();
 PredictBatchRequest request = new PredictBatchRequest();
 
 EstimatedDeliveryDateRequest estimatedDeliveryDateRequest = new EstimatedDeliveryDateRequest();
+
+DestinationAddressEstimatedDeliveryDateRequest dest = new DestinationAddressEstimatedDeliveryDateRequest();
+dest.Country = "<ISO 3166-1 country/region code>";
+dest.State = "<ISO 3166-1 country/region code>";
+estimatedDeliveryDateRequest.DestinationAddress = dest;
+
+OriginAddressEstimatedDeliveryDateRequest origin = new OriginAddressEstimatedDeliveryDateRequest();
+origin.Country = "<ISO 3166-1 country/region code>";
+origin.State = "<ISO 3166-1 country/region code>";
+estimatedDeliveryDateRequest.OriginAddress = origin;
+
 estimatedDeliveryDateRequest.Slug = "<slug>";
+estimatedDeliveryDateRequest.PickupTime = "2024-08-01 06:42:30";
 request.EstimatedDeliveryDates = new EstimatedDeliveryDateRequest[] { estimatedDeliveryDateRequest };
 
 options.PredictBatchRequest = request;
 
+EstimatedPickupEstimatedDeliveryDateRequest r2 = new EstimatedPickupEstimatedDeliveryDateRequest();
+r2.BusinessDays = new int?[] { 0 };
+
 PredictBatchResponse resp = client.EstimatedDeliveryDate.PredictBatch(options);
-Console.WriteLine(resp.EstimatedDeliveryDates[0].Slug);
+Console.WriteLine(resp.EstimatedDeliveryDates[0].PickupTime);
 ```
 
 ## Help
 
 If you get stuck, we're here to help:
 
-- [Issue Tracker](https://github.com/AfterShip/tracking-sdk-net/issues) for questions, feature requests, bug reports and
-  general discussion related to this package. Try searching before you create a new issue.
+- [Issue Tracker](https://github.com/AfterShip/tracking-sdk-net/issues) for questions, feature requests, bug reports and general discussion related to this package. Try searching before you create a new issue.
 - Contact AfterShip official support via support@aftership.com
 
 ## License
-
 Copyright (c) 2024 AfterShip
 
 Licensed under the MIT license.
