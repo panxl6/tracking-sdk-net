@@ -1,0 +1,8 @@
+.idea/
+.vs/
+src/AfterShipTracking/Test/
+src/AfterShipTracking/AfterShipTracking/bin/
+src/AfterShipTracking/AfterShipTracking/obj/
+Tracking.sln.DotSettings.user
+.DS_Store
+.config/
