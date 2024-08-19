@@ -34,7 +34,7 @@ Before you begin to integrate:
 
 - [Create an AfterShip account](https://admin.aftership.com/).
 - [Create an API key](https://organization.automizely.com/api-keys).
-- [Install .Net](https://dotnet.microsoft.com/en-us/download) version 6.0 or later.
+- [Install .Net](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) version 6.0 or later.
 
 ## Quick Start
 
@@ -57,7 +57,7 @@ From within Visual Studio:
 2. Right-click on a project within your solution.
 3. Click on *Manage NuGet Packages...*
 4. Click on the *Browse* tab and search for "AfterShipTracking".
-5. Click on the Tracking package, select the appropriate version in the
+5. Click on the AfterShipTracking package, select the appropriate version in the
    right-tab and click *Install*.
 
 For with Visual Studio Code:
