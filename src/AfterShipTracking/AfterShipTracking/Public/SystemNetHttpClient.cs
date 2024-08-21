@@ -210,13 +210,10 @@ namespace AfterShipTracking
                 var httpRequest = this.BuildRequestMessage(request);
 
                 var stopwatch = Stopwatch.StartNew();
-                if (this.IsRateOverflow())
-                {
-                    throw ErrorCode.GenSDKError(
-                        ErrorCode.RATE_LIMIT_EXCEEDED,
-                        ErrorCode.RATE_LIMIT_EXCEEDED
-                    );
-                }
+                // if (this.IsRateOverflow())
+                // {
+                //     throw ErrorCode.GenSDKError(ErrorCode.RATE_LIMIT_EXCEEDED, ErrorCode.RATE_LIMIT_EXCEEDED);
+                // }
                 try
                 {
                     response = await this.httpClient.SendAsync(httpRequest).ConfigureAwait(false);
@@ -239,7 +236,7 @@ namespace AfterShipTracking
 
                 stopwatch.Stop();
 
-                SetRateLimit(this.rateLimit, response);
+                // SetRateLimit(this.rateLimit, response);
 
                 if (
                     !this.ShouldRetry(

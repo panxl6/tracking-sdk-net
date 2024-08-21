@@ -10,60 +10,36 @@ namespace AfterShipTracking
     /// <summary>
     /// Description
     /// </summary>
-    public class UpdateTrackingBySlugTrackingNumberOptions : BaseOptions
+    public class GetTrackingByIdOptions : BaseOptions
     {
-        public UpdateTrackingBySlugTrackingNumberOptions() { }
+        public GetTrackingByIdOptions() { }
 
-        public string TrackingAccountNumber { get; set; }
-        public string TrackingOriginCountry { get; set; }
-        public string TrackingDestinationCountry { get; set; }
-        public string TrackingKey { get; set; }
-        public string TrackingPostalCode { get; set; }
-        public string TrackingShipDate { get; set; }
-        public string TrackingState { get; set; }
+        public string Fields { get; set; }
+        public string Lang { get; set; }
 
         public override List<KeyValuePair<string, string>> GetQueryParams()
         {
             var p = new List<KeyValuePair<string, string>>();
-            p.Add(
-                new KeyValuePair<string, string>("tracking_account_number", TrackingAccountNumber)
-            );
-            p.Add(
-                new KeyValuePair<string, string>("tracking_origin_country", TrackingOriginCountry)
-            );
-            p.Add(
-                new KeyValuePair<string, string>(
-                    "tracking_destination_country",
-                    TrackingDestinationCountry
-                )
-            );
-            p.Add(new KeyValuePair<string, string>("tracking_key", TrackingKey));
-            p.Add(new KeyValuePair<string, string>("tracking_postal_code", TrackingPostalCode));
-            p.Add(new KeyValuePair<string, string>("tracking_ship_date", TrackingShipDate));
-            p.Add(new KeyValuePair<string, string>("tracking_state", TrackingState));
+            p.Add(new KeyValuePair<string, string>("fields", Fields));
+            p.Add(new KeyValuePair<string, string>("lang", Lang));
             return p;
-        }
-
-        public UpdateTrackingBySlugTrackingNumberRequest UpdateTrackingBySlugTrackingNumberRequest { get; set; }
-
-        public override string GetBody()
-        {
-            string body = null;
-
-            if (UpdateTrackingBySlugTrackingNumberRequest != null)
-            {
-                body = BaseResourceService.ToJson(UpdateTrackingBySlugTrackingNumberRequest);
-            }
-            return body;
         }
     }
 
     /// <summary>
     /// Description
     /// </summary>
-    public class DeleteTrackingBySlugTrackingNumberOptions : BaseOptions
+    public class DeleteTrackingByIdOptions : BaseOptions
     {
-        public DeleteTrackingBySlugTrackingNumberOptions() { }
+        public DeleteTrackingByIdOptions() { }
+    }
+
+    /// <summary>
+    /// Description
+    /// </summary>
+    public class RetrackTrackingBySlugTrackingNumberOptions : BaseOptions
+    {
+        public RetrackTrackingBySlugTrackingNumberOptions() { }
 
         public string TrackingAccountNumber { get; set; }
         public string TrackingOriginCountry { get; set; }
@@ -155,12 +131,60 @@ namespace AfterShipTracking
     /// <summary>
     /// Description
     /// </summary>
-    public class GetTrackingBySlugTrackingNumberOptions : BaseOptions
+    public class CreateTrackingOptions : BaseOptions
     {
-        public GetTrackingBySlugTrackingNumberOptions() { }
+        public CreateTrackingOptions() { }
 
-        public string Fields { get; set; }
-        public string Lang { get; set; }
+        public CreateTrackingRequest CreateTrackingRequest { get; set; }
+
+        public override string GetBody()
+        {
+            string body = null;
+
+            if (CreateTrackingRequest != null)
+            {
+                body = BaseResourceService.ToJson(CreateTrackingRequest);
+            }
+            return body;
+        }
+    }
+
+    /// <summary>
+    /// Description
+    /// </summary>
+    public class RetrackTrackingByIdOptions : BaseOptions
+    {
+        public RetrackTrackingByIdOptions() { }
+    }
+
+    /// <summary>
+    /// Description
+    /// </summary>
+    public class MarkTrackingCompletedByIdOptions : BaseOptions
+    {
+        public MarkTrackingCompletedByIdOptions() { }
+
+        public MarkTrackingCompletedByIdRequest MarkTrackingCompletedByIdRequest { get; set; }
+
+        public override string GetBody()
+        {
+            string body = null;
+
+            if (MarkTrackingCompletedByIdRequest != null)
+            {
+                body = BaseResourceService.ToJson(MarkTrackingCompletedByIdRequest);
+            }
+            return body;
+        }
+    }
+
+    /// <summary>
+    /// Description
+    /// </summary>
+    public class UpdateTrackingBySlugTrackingNumberOptions : BaseOptions
+    {
+        public UpdateTrackingBySlugTrackingNumberOptions() { }
+
         public string TrackingAccountNumber { get; set; }
         public string TrackingOriginCountry { get; set; }
         public string TrackingDestinationCountry { get; set; }
@@ -172,8 +196,6 @@ namespace AfterShipTracking
         public override List<KeyValuePair<string, string>> GetQueryParams()
         {
             var p = new List<KeyValuePair<string, string>>();
-            p.Add(new KeyValuePair<string, string>("fields", Fields));
-            p.Add(new KeyValuePair<string, string>("lang", Lang));
             p.Add(
                 new KeyValuePair<string, string>("tracking_account_number", TrackingAccountNumber)
             );
@@ -192,14 +214,27 @@ namespace AfterShipTracking
             p.Add(new KeyValuePair<string, string>("tracking_state", TrackingState));
             return p;
         }
+
+        public UpdateTrackingBySlugTrackingNumberRequest UpdateTrackingBySlugTrackingNumberRequest { get; set; }
+
+        public override string GetBody()
+        {
+            string body = null;
+
+            if (UpdateTrackingBySlugTrackingNumberRequest != null)
+            {
+                body = BaseResourceService.ToJson(UpdateTrackingBySlugTrackingNumberRequest);
+            }
+            return body;
+        }
     }
 
     /// <summary>
     /// Description
     /// </summary>
-    public class RetrackTrackingBySlugTrackingNumberOptions : BaseOptions
+    public class DeleteTrackingBySlugTrackingNumberOptions : BaseOptions
     {
-        public RetrackTrackingBySlugTrackingNumberOptions() { }
+        public DeleteTrackingBySlugTrackingNumberOptions() { }
 
         public string TrackingAccountNumber { get; set; }
         public string TrackingOriginCountry { get; set; }
@@ -286,62 +321,6 @@ namespace AfterShipTracking
     /// <summary>
     /// Description
     /// </summary>
-    public class MarkTrackingCompletedByIdOptions : BaseOptions
-    {
-        public MarkTrackingCompletedByIdOptions() { }
-
-        public MarkTrackingCompletedByIdRequest MarkTrackingCompletedByIdRequest { get; set; }
-
-        public override string GetBody()
-        {
-            string body = null;
-
-            if (MarkTrackingCompletedByIdRequest != null)
-            {
-                body = BaseResourceService.ToJson(MarkTrackingCompletedByIdRequest);
-            }
-            return body;
-        }
-    }
-
-    /// <summary>
-    /// Description
-    /// </summary>
-    public class RetrackTrackingByIdOptions : BaseOptions
-    {
-        public RetrackTrackingByIdOptions() { }
-    }
-
-    /// <summary>
-    /// Description
-    /// </summary>
-    public class DeleteTrackingByIdOptions : BaseOptions
-    {
-        public DeleteTrackingByIdOptions() { }
-    }
-
-    /// <summary>
-    /// Description
-    /// </summary>
-    public class GetTrackingByIdOptions : BaseOptions
-    {
-        public GetTrackingByIdOptions() { }
-
-        public string Fields { get; set; }
-        public string Lang { get; set; }
-
-        public override List<KeyValuePair<string, string>> GetQueryParams()
-        {
-            var p = new List<KeyValuePair<string, string>>();
-            p.Add(new KeyValuePair<string, string>("fields", Fields));
-            p.Add(new KeyValuePair<string, string>("lang", Lang));
-            return p;
-        }
-    }
-
-    /// <summary>
-    /// Description
-    /// </summary>
     public class UpdateTrackingByIdOptions : BaseOptions
     {
         public UpdateTrackingByIdOptions() { }
@@ -363,21 +342,42 @@ namespace AfterShipTracking
     /// <summary>
     /// Description
     /// </summary>
-    public class CreateTrackingOptions : BaseOptions
+    public class GetTrackingBySlugTrackingNumberOptions : BaseOptions
     {
-        public CreateTrackingOptions() { }
+        public GetTrackingBySlugTrackingNumberOptions() { }
 
-        public CreateTrackingRequest CreateTrackingRequest { get; set; }
+        public string Fields { get; set; }
+        public string Lang { get; set; }
+        public string TrackingAccountNumber { get; set; }
+        public string TrackingOriginCountry { get; set; }
+        public string TrackingDestinationCountry { get; set; }
+        public string TrackingKey { get; set; }
+        public string TrackingPostalCode { get; set; }
+        public string TrackingShipDate { get; set; }
+        public string TrackingState { get; set; }
 
-        public override string GetBody()
+        public override List<KeyValuePair<string, string>> GetQueryParams()
         {
-            string body = null;
-
-            if (CreateTrackingRequest != null)
-            {
-                body = BaseResourceService.ToJson(CreateTrackingRequest);
-            }
-            return body;
+            var p = new List<KeyValuePair<string, string>>();
+            p.Add(new KeyValuePair<string, string>("fields", Fields));
+            p.Add(new KeyValuePair<string, string>("lang", Lang));
+            p.Add(
+                new KeyValuePair<string, string>("tracking_account_number", TrackingAccountNumber)
+            );
+            p.Add(
+                new KeyValuePair<string, string>("tracking_origin_country", TrackingOriginCountry)
+            );
+            p.Add(
+                new KeyValuePair<string, string>(
+                    "tracking_destination_country",
+                    TrackingDestinationCountry
+                )
+            );
+            p.Add(new KeyValuePair<string, string>("tracking_key", TrackingKey));
+            p.Add(new KeyValuePair<string, string>("tracking_postal_code", TrackingPostalCode));
+            p.Add(new KeyValuePair<string, string>("tracking_ship_date", TrackingShipDate));
+            p.Add(new KeyValuePair<string, string>("tracking_state", TrackingState));
+            return p;
         }
     }
 }

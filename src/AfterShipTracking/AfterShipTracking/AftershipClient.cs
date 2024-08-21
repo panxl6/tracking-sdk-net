@@ -64,9 +64,9 @@ namespace AfterShipTracking
 
         public IHttpClient HttpClient { get; }
 
-        public EstimatedDeliveryDateService EstimatedDeliveryDate { get; set; }
-        public TrackingService Tracking { get; set; }
         public CourierService Courier { get; set; }
+        public TrackingService Tracking { get; set; }
+        public EstimatedDeliveryDateService EstimatedDeliveryDate { get; set; }
 
         public AfterShipClient(
             string domain = null,
@@ -105,9 +105,9 @@ namespace AfterShipTracking
                     this.Proxy
                 );
 
-            EstimatedDeliveryDate = new EstimatedDeliveryDateService(HttpClient);
-            Tracking = new TrackingService(HttpClient);
             Courier = new CourierService(HttpClient);
+            Tracking = new TrackingService(HttpClient);
+            EstimatedDeliveryDate = new EstimatedDeliveryDateService(HttpClient);
         }
 
         private void CheckConfig()
