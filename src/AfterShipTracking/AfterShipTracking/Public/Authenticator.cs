@@ -76,13 +76,7 @@ namespace AfterShipTracking
                     bodyBytes = ms.ToArray();
                 }
                 string bodyString = Encoding.UTF8.GetString(bodyBytes);
-                string s = SignString(
-                    request.Method.ToString(),
-                    bodyString,
-                    request.Headers.GetValues("date").First(),
-                    h,
-                    rs
-                );
+                string s = SignString(request.Method.ToString(), bodyString, request.Headers.GetValues("date").First(), h, rs);
                 if (this.AuthenticationType == AUTH_TYPE_AES)
                 {
                     string aesSign = Encryption.HmacSha256Encrypt(s, this.ApiSecret);
@@ -108,20 +102,16 @@ namespace AfterShipTracking
         public static string CanonicalHeader(HttpHeaders headers)
         {
             // Filter and sort headers with the "as-" prefix
-            var filteredHeaders = headers
-                .Where(h => h.Key.StartsWith("as-", StringComparison.OrdinalIgnoreCase))
-                .OrderBy(h => h.Key, StringComparer.OrdinalIgnoreCase);
+            var filteredHeaders = headers.Where(h => h.Key.StartsWith("as-", StringComparison.OrdinalIgnoreCase))
+            .OrderBy(h => h.Key, StringComparer.OrdinalIgnoreCase);
 
             // Build the canonicalized headers string
-            string canonicalizedHeaders = string.Join(
-                "\n",
-                filteredHeaders.Select(h =>
-                {
-                    string key = h.Key.Trim();
-                    string value = string.Join(",", h.Value).Trim();
-                    return $"{key.ToLowerInvariant()}:{value}";
-                })
-            );
+            string canonicalizedHeaders = string.Join("\n", filteredHeaders.Select(h =>
+            {
+                string key = h.Key.Trim();
+                string value = string.Join(",", h.Value).Trim();
+                return $"{key.ToLowerInvariant()}:{value}";
+            }));
 
             return canonicalizedHeaders;
         }
@@ -152,21 +142,16 @@ namespace AfterShipTracking
 
             if (sortedParams.Count > 0)
             {
-                canonicalizedResource +=
-                    "?" + string.Join("&", sortedParams.Select(p => $"{p.Key}={p.Value}"));
+                canonicalizedResource += "?" + string.Join("&", sortedParams.Select(p => $"{p.Key}={p.Value}"));
             }
+
 
             return canonicalizedResource;
         }
 
-        public static string SignString(
-            String menthod,
-            string body,
-            string date,
-            string canonicalHeader,
-            string canonicalResource
-        )
+        public static string SignString(String menthod, string body, string date, string canonicalHeader, string canonicalResource)
         {
+
             StringBuilder sb = new StringBuilder();
             string newBody = "";
             string contentType = "";

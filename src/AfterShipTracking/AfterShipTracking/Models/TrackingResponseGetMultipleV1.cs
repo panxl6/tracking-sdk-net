@@ -11,115 +11,101 @@ namespace AfterShipTracking
     /// <summary>
     /// Tracking response for getting tracking
     /// </summary>
-    public class TrackingResponseGetMultipleV1
+    public class  TrackingResponseGetMultipleV1
     {
         /// <summary>
         ///  Meta Meta data
         /// </summary>
         [JsonProperty("meta")]
-        public MetaV1 Meta { get; set; }
-
+        public MetaV1  Meta { get; set; }
         /// <summary>
-        ///  Data
+        ///  Data 
         /// </summary>
-        [JsonProperty("data", NullValueHandling = NullValueHandling.Ignore)]
-        public DataTrackingResponseGetMultipleV1? Data { get; set; }
-
-        public TrackingResponseGetMultipleV1() { }
+        [JsonProperty("data",NullValueHandling = NullValueHandling.Ignore)]
+        public DataTrackingResponseGetMultipleV1?  Data { get; set; }
+        public TrackingResponseGetMultipleV1()
+        {
+        }
     }
-
+    
     /// <summary>
-    ///
+    /// 
     /// </summary>
-    public class DataTrackingResponseGetMultipleV1
+    public class  DataTrackingResponseGetMultipleV1
     {
         /// <summary>
         ///  Page Page to show. (Default: 1)
         /// </summary>
-        [JsonProperty("page", NullValueHandling = NullValueHandling.Ignore)]
-        public int? Page { get; set; }
-
+        [JsonProperty("page",NullValueHandling = NullValueHandling.Ignore)]
+        public int?  Page { get; set; }
         /// <summary>
         ///  Limit Number of trackings each page contain. (Default: 100, Max: 200)
         /// </summary>
-        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
-        public int? Limit { get; set; }
-
+        [JsonProperty("limit",NullValueHandling = NullValueHandling.Ignore)]
+        public int?  Limit { get; set; }
         /// <summary>
         ///  Count Number of returned trackings
         /// </summary>
-        [JsonProperty("count", NullValueHandling = NullValueHandling.Ignore)]
-        public int? Count { get; set; }
-
+        [JsonProperty("count",NullValueHandling = NullValueHandling.Ignore)]
+        public int?  Count { get; set; }
         /// <summary>
         ///  Keyword Search the content of the tracking record fields: `tracking_number`, `title`, `order_id`, `customer_name`, `custom_fields`, `order_id`, `emails`, `smses`
         /// </summary>
-        [JsonProperty("keyword", NullValueHandling = NullValueHandling.Ignore)]
-        public string? Keyword { get; set; }
-
+        [JsonProperty("keyword",NullValueHandling = NullValueHandling.Ignore)]
+        public string?  Keyword { get; set; }
         /// <summary>
-        ///  Slug Unique
+        ///  Slug Unique 
         /// </summary>
-        [JsonProperty("slug", NullValueHandling = NullValueHandling.Ignore)]
-        public string? Slug { get; set; }
-
+        [JsonProperty("slug",NullValueHandling = NullValueHandling.Ignore)]
+        public string?  Slug { get; set; }
         /// <summary>
-        ///  Origin Origin country/region of trackings. Use
+        ///  Origin Origin country/region of trackings. Use 
         /// </summary>
-        [JsonProperty("origin", NullValueHandling = NullValueHandling.Ignore)]
-        public string?[] Origin { get; set; }
-
+        [JsonProperty("origin",NullValueHandling = NullValueHandling.Ignore)]
+        public string? [] Origin { get; set; }
         /// <summary>
-        ///  Destination Destination country/region of trackings. Use
+        ///  Destination Destination country/region of trackings. Use 
         /// </summary>
-        [JsonProperty("destination", NullValueHandling = NullValueHandling.Ignore)]
-        public string?[] Destination { get; set; }
-
+        [JsonProperty("destination",NullValueHandling = NullValueHandling.Ignore)]
+        public string? [] Destination { get; set; }
         /// <summary>
         ///  Tag Current status of tracking. (
         /// </summary>
-        [JsonProperty("tag", NullValueHandling = NullValueHandling.Ignore)]
-        public TagV1? Tag { get; set; }
-
+        [JsonProperty("tag",NullValueHandling = NullValueHandling.Ignore)]
+        public TagV1?  Tag { get; set; }
         /// <summary>
         ///  CreatedAtMin Start date and time of trackings created. AfterShip only stores data of 120 days.
         /// </summary>
-        [JsonProperty("created_at_min", NullValueHandling = NullValueHandling.Ignore)]
-        public string? CreatedAtMin { get; set; }
-
+        [JsonProperty("created_at_min",NullValueHandling = NullValueHandling.Ignore)]
+        public string?  CreatedAtMin { get; set; }
         /// <summary>
         ///  CreatedAtMax End date and time of trackings created.
         /// </summary>
-        [JsonProperty("created_at_max", NullValueHandling = NullValueHandling.Ignore)]
-        public string? CreatedAtMax { get; set; }
-
+        [JsonProperty("created_at_max",NullValueHandling = NullValueHandling.Ignore)]
+        public string?  CreatedAtMax { get; set; }
         /// <summary>
         ///  LastUpdatedAt Date and time the tracking was last updated
         /// </summary>
-        [JsonProperty("last_updated_at", NullValueHandling = NullValueHandling.Ignore)]
-        public string? LastUpdatedAt { get; set; }
-
+        [JsonProperty("last_updated_at",NullValueHandling = NullValueHandling.Ignore)]
+        public string?  LastUpdatedAt { get; set; }
         /// <summary>
         ///  ReturnToSender Whether or not the shipment is returned to sender. Value is `true` when any of its checkpoints has subtag `Exception_010` (returning to sender) or `Exception_011` (returned to sender). Otherwise value is `false`
         /// </summary>
-        [JsonProperty("return_to_sender", NullValueHandling = NullValueHandling.Ignore)]
-        public bool?[] ReturnToSender { get; set; }
-
+        [JsonProperty("return_to_sender",NullValueHandling = NullValueHandling.Ignore)]
+        public bool? [] ReturnToSender { get; set; }
         /// <summary>
         ///  CourierDestinationCountryIso3 Destination country/region of the tracking detected from the courier. ISO Alpha-3 (three letters). Value will be `null` if the courier doesn't provide the destination country.
         /// </summary>
-        [JsonProperty(
-            "courier_destination_country_iso3",
-            NullValueHandling = NullValueHandling.Ignore
-        )]
-        public string?[] CourierDestinationCountryIso3 { get; set; }
-
+        [JsonProperty("courier_destination_country_iso3",NullValueHandling = NullValueHandling.Ignore)]
+        public string? [] CourierDestinationCountryIso3 { get; set; }
         /// <summary>
-        ///  Trackings Array of
+        ///  Trackings Array of 
         /// </summary>
-        [JsonProperty("trackings", NullValueHandling = NullValueHandling.Ignore)]
-        public Tracking?[] Trackings { get; set; }
+        [JsonProperty("trackings",NullValueHandling = NullValueHandling.Ignore)]
+        public Tracking? [] Trackings { get; set; }
 
-        public DataTrackingResponseGetMultipleV1() { }
+        public DataTrackingResponseGetMultipleV1()
+        {
+        }
     }
 }

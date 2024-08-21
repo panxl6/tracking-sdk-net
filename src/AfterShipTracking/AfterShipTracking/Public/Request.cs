@@ -59,7 +59,11 @@ namespace AfterShipTracking
             Body = body;
         }
 
-        public Request(HttpMethod method, string path, BaseOptions? options)
+        public Request(
+            HttpMethod method,
+            string path,
+            BaseOptions? options
+        )
         {
             Method = method;
             Path = path;

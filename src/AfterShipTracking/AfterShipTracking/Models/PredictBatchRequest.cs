@@ -9,16 +9,18 @@ using Newtonsoft.Json;
 namespace AfterShipTracking
 {
     /// <summary>
-    ///
+    /// 
     /// </summary>
-    public class PredictBatchRequest
+    public class  PredictBatchRequest
     {
         /// <summary>
-        ///  EstimatedDeliveryDates
+        ///  EstimatedDeliveryDates 
         /// </summary>
         [JsonProperty("estimated_delivery_dates")]
-        public EstimatedDeliveryDateRequest[] EstimatedDeliveryDates { get; set; }
-
-        public PredictBatchRequest() { }
+        public EstimatedDeliveryDateRequest [] EstimatedDeliveryDates { get; set; }
+        public PredictBatchRequest()
+        {
+        }
     }
+    
 }

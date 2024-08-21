@@ -16,31 +16,42 @@ namespace AfterShipTracking
             this.HttpClient = httpClient;
         }
 
-        public DetectCourierResponse DetectCourier(DetectCourierOptions? options = null)
+        public DetectCourierResponse DetectCourier( DetectCourierOptions? options = null)
         {
             string path = $"/tracking/2024-07/couriers/detect";
-            Request request = new Request(HttpMethod.Post, path, options);
+            Request request = new Request(
+                HttpMethod.Post,
+                path,
+                options
+            );
 
             var response = this.HttpClient.MakeRequest(request);
             return ProcessData<DetectCourierResponse>(response);
         }
-
-        public GetAllCouriersResponse GetAllCouriers(GetAllCouriersOptions? options = null)
+        public GetAllCouriersResponse GetAllCouriers( GetAllCouriersOptions? options = null)
         {
             string path = $"/tracking/2024-07/couriers/all";
-            Request request = new Request(HttpMethod.Get, path, options);
+            Request request = new Request(
+                HttpMethod.Get,
+                path,
+                options
+            );
 
             var response = this.HttpClient.MakeRequest(request);
             return ProcessData<GetAllCouriersResponse>(response);
         }
-
-        public GetUserCouriersResponse GetUserCouriers(GetUserCouriersOptions? options = null)
+        public GetUserCouriersResponse GetUserCouriers( GetUserCouriersOptions? options = null)
         {
             string path = $"/tracking/2024-07/couriers";
-            Request request = new Request(HttpMethod.Get, path, options);
+            Request request = new Request(
+                HttpMethod.Get,
+                path,
+                options
+            );
 
             var response = this.HttpClient.MakeRequest(request);
             return ProcessData<GetUserCouriersResponse>(response);
         }
     }
 }
+

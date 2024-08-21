@@ -9,114 +9,103 @@ using Newtonsoft.Json;
 namespace AfterShipTracking
 {
     /// <summary>
-    ///
+    /// 
     /// </summary>
-    public class GetTrackingsResponse
+    public class  GetTrackingsResponse
     {
         /// <summary>
         ///  Page Page to show. (Default: 1)
         /// </summary>
         [JsonProperty("page")]
-        public int? Page { get; set; }
-
+        public int?  Page { get; set; }
         /// <summary>
         ///  Limit Number of trackings each page contain. (Default: 100, Max: 200)
         /// </summary>
         [JsonProperty("limit")]
-        public int? Limit { get; set; }
-
+        public int?  Limit { get; set; }
         /// <summary>
         ///  Count Number of returned trackings
         /// </summary>
         [JsonProperty("count")]
-        public int? Count { get; set; }
-
+        public int?  Count { get; set; }
         /// <summary>
         ///  Keyword Search the content of the tracking record fields: `tracking_number`, `title`, `order_id`, `customer_name`, `custom_fields`, `order_id`, `emails`, `smses`
         /// </summary>
         [JsonProperty("keyword")]
-        public string? Keyword { get; set; }
-
+        public string?  Keyword { get; set; }
         /// <summary>
-        ///  Slug Unique
+        ///  Slug Unique 
         /// </summary>
         [JsonProperty("slug")]
-        public string? Slug { get; set; }
-
+        public string?  Slug { get; set; }
         /// <summary>
-        ///  Origin Origin country/region of trackings. Use
+        ///  Origin Origin country/region of trackings. Use 
         /// </summary>
         [JsonProperty("origin")]
-        public string?[] Origin { get; set; }
-
+        public string? [] Origin { get; set; }
         /// <summary>
-        ///  Destination Destination country/region of trackings. Use
+        ///  Destination Destination country/region of trackings. Use 
         /// </summary>
         [JsonProperty("destination")]
-        public string?[] Destination { get; set; }
-
+        public string? [] Destination { get; set; }
         /// <summary>
         ///  Tag Current status of tracking. (
         /// </summary>
         [JsonProperty("tag")]
-        public TagV1? Tag { get; set; }
-
+        public TagV1?  Tag { get; set; }
         /// <summary>
         ///  CreatedAtMin Start date and time of trackings created. AfterShip only stores data of 120 days.
         /// </summary>
         [JsonProperty("created_at_min")]
-        public string? CreatedAtMin { get; set; }
-
+        public string?  CreatedAtMin { get; set; }
         /// <summary>
         ///  CreatedAtMax End date and time of trackings created.
         /// </summary>
         [JsonProperty("created_at_max")]
-        public string? CreatedAtMax { get; set; }
-
+        public string?  CreatedAtMax { get; set; }
         /// <summary>
         ///  LastUpdatedAt Date and time the tracking was last updated
         /// </summary>
         [JsonProperty("last_updated_at")]
-        public string? LastUpdatedAt { get; set; }
-
+        public string?  LastUpdatedAt { get; set; }
         /// <summary>
         ///  ReturnToSender Whether or not the shipment is returned to sender. Value is `true` when any of its checkpoints has subtag `Exception_010` (returning to sender) or `Exception_011` (returned to sender). Otherwise value is `false`
         /// </summary>
         [JsonProperty("return_to_sender")]
-        public bool?[] ReturnToSender { get; set; }
-
+        public bool? [] ReturnToSender { get; set; }
         /// <summary>
         ///  CourierDestinationCountryIso3 Destination country/region of the tracking detected from the courier. ISO Alpha-3 (three letters). Value will be `null` if the courier doesn't provide the destination country.
         /// </summary>
         [JsonProperty("courier_destination_country_iso3")]
-        public string?[] CourierDestinationCountryIso3 { get; set; }
-
+        public string? [] CourierDestinationCountryIso3 { get; set; }
         /// <summary>
-        ///  Trackings Array of
+        ///  Trackings Array of 
         /// </summary>
         [JsonProperty("trackings")]
-        public Tracking?[] Trackings { get; set; }
-
-        public GetTrackingsResponse() { }
+        public Tracking? [] Trackings { get; set; }
+        public GetTrackingsResponse()
+        {
+        }
     }
-
+    
     /// <summary>
-    ///
+    /// 
     /// </summary>
-    public class GetTrackingsResponseTrackingListData
+    public class  GetTrackingsResponseTrackingListData
     {
         /// <summary>
-        ///  Trackings
+        ///  Trackings 
         /// </summary>
         [JsonProperty("trackings")]
-        public Tracking?[] Trackings { get; set; }
-
+        public Tracking? [] Trackings { get; set; }
         /// <summary>
-        ///  Pagination
+        ///  Pagination 
         /// </summary>
         [JsonProperty("pagination")]
-        public PaginationPage? Pagination { get; set; }
+        public PaginationPage?  Pagination { get; set; }
 
-        public GetTrackingsResponseTrackingListData() { }
+        public GetTrackingsResponseTrackingListData()
+        {
+        }
     }
 }

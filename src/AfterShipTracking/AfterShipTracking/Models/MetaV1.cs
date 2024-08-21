@@ -11,26 +11,26 @@ namespace AfterShipTracking
     /// <summary>
     /// Meta data
     /// </summary>
-    public class MetaV1
+    public class  MetaV1
     {
         /// <summary>
         ///  Code meta code
         /// </summary>
         [JsonProperty("code")]
-        public int Code { get; set; }
-
+        public int  Code { get; set; }
         /// <summary>
         ///  Message error message, only exist if the response status is not 2xx
         /// </summary>
-        [JsonProperty("message", NullValueHandling = NullValueHandling.Ignore)]
-        public string? Message { get; set; }
-
+        [JsonProperty("message",NullValueHandling = NullValueHandling.Ignore)]
+        public string?  Message { get; set; }
         /// <summary>
         ///  Type error type, only exist if the response status is not 2xx
         /// </summary>
-        [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
-        public string? Type { get; set; }
-
-        public MetaV1() { }
+        [JsonProperty("type",NullValueHandling = NullValueHandling.Ignore)]
+        public string?  Type { get; set; }
+        public MetaV1()
+        {
+        }
     }
+    
 }

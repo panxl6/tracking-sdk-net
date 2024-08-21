@@ -12,15 +12,18 @@ namespace AfterShipTracking
     /// </summary>
     public class PredictBatchOptions : BaseOptions
     {
-        public PredictBatchOptions() { }
+        public  PredictBatchOptions()
+        {
+        }
+
 
         public PredictBatchRequest PredictBatchRequest { get; set; }
 
-        public override string GetBody()
+        override public string GetBody()
         {
             string body = null;
 
-            if (PredictBatchRequest != null)
+            if ( PredictBatchRequest != null)
             {
                 body = BaseResourceService.ToJson(PredictBatchRequest);
             }

@@ -16,22 +16,16 @@ namespace AfterShipTracking
     {
         [EnumMember(Value = "tracking_account_number")]
         TrackingAccountNumber,
-
         [EnumMember(Value = "tracking_postal_code")]
         TrackingPostalCode,
-
         [EnumMember(Value = "tracking_ship_date")]
         TrackingShipDate,
-
         [EnumMember(Value = "tracking_key")]
         TrackingKey,
-
         [EnumMember(Value = "tracking_origin_country")]
         TrackingOriginCountry,
-
         [EnumMember(Value = "tracking_destination_country")]
         TrackingDestinationCountry,
-
         [EnumMember(Value = "tracking_state")]
         TrackingState,
     }

@@ -16,13 +16,18 @@ namespace AfterShipTracking
             this.HttpClient = httpClient;
         }
 
-        public PredictBatchResponse PredictBatch(PredictBatchOptions? options = null)
+        public PredictBatchResponse PredictBatch( PredictBatchOptions? options = null)
         {
             string path = $"/tracking/2024-07/estimated-delivery-date/predict-batch";
-            Request request = new Request(HttpMethod.Post, path, options);
+            Request request = new Request(
+                HttpMethod.Post,
+                path,
+                options
+            );
 
             var response = this.HttpClient.MakeRequest(request);
             return ProcessData<PredictBatchResponse>(response);
         }
     }
 }
+

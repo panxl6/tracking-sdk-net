@@ -20,6 +20,8 @@ namespace AfterShipTracking
         [JsonProperty("page")]
         public string Page { get; set; }
 
-        public ListOptions() { }
+        public ListOptions()
+        {
+        }
     }
 }

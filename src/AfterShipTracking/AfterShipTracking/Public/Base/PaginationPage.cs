@@ -26,6 +26,7 @@ namespace AfterShipTracking
         [JsonProperty("total")]
         public int? Total { get; set; }
 
+
         /// <summary>
         /// Total count
         /// </summary>
@@ -41,3 +42,4 @@ namespace AfterShipTracking
         }
     }
 }
+

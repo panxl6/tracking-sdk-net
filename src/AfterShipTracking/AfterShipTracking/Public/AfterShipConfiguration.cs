@@ -15,8 +15,7 @@ namespace AfterShipTracking
         public const string SDK_PREFIX = "AFTERSHIP_TRACKING_SDK";
         public const int DEFAULT_MAX_RETRY = 2;
         public const int DEFAULT_TIMEOUT = 10000;
-        public const string DEFAULT_USER_AGENT =
-            "tracking-sdk-net/8.0.0 (https://www.aftership.com) System.Net.Http.HttpClient/0.0.0";
+        public const string DEFAULT_USER_AGENT = "tracking-sdk-net/8.0.0 (https://www.aftership.com) System.Net.Http.HttpClient/0.0.0";
         public const string DEFAULT_DOMAIN = "https://api.aftership.com";
 
         private static string domain;
@@ -39,8 +38,9 @@ namespace AfterShipTracking
                 {
                     return domain;
                 }
-                return Environment.GetEnvironmentVariable(SDK_PREFIX + "_DOMAIN") ?? DEFAULT_DOMAIN;
+                return Environment.GetEnvironmentVariable(SDK_PREFIX+"_DOMAIN") ?? DEFAULT_DOMAIN;
             }
+
             set
             {
 
@@ -59,19 +59,16 @@ namespace AfterShipTracking
                 {
                     return maxRetry;
                 }
-                if (
-                    int.TryParse(
-                        Environment.GetEnvironmentVariable(SDK_PREFIX + "_MAX_RETRY"),
-                        out int n
-                    )
-                    && n > 0
-                )
+                if (int.TryParse(Environment.GetEnvironmentVariable(SDK_PREFIX + "_MAX_RETRY"), out int n) && n > 0)
                 {
                     return n;
                 }
                 return DEFAULT_MAX_RETRY;
             }
-            set { maxRetry = value; }
+            set
+            {
+                maxRetry = value;
+            }
         }
 
         /// <summary>
@@ -81,23 +78,21 @@ namespace AfterShipTracking
         {
             get
             {
-                if (timeout > 0)
+                if (timeout >0 )
                 {
                     return timeout;
                 }
-                if (
-                    int.TryParse(
-                        Environment.GetEnvironmentVariable(SDK_PREFIX + "_TIMEOUT"),
-                        out int n
-                    )
-                    && n > 0
-                )
+                if (int.TryParse(Environment.GetEnvironmentVariable(SDK_PREFIX + "_TIMEOUT"), out int n) && n > 0)
                 {
-                    return n;
+                      return n;
                 }
                 return DEFAULT_TIMEOUT;
             }
-            set { timeout = value; }
+
+            set
+            {
+                timeout = value;
+            }
         }
 
         /// <summary>
@@ -111,9 +106,14 @@ namespace AfterShipTracking
                 {
                     return userAgent;
                 }
-                return Environment.GetEnvironmentVariable(SDK_PREFIX + "_USER_AGENT") ?? null;
+                return Environment.GetEnvironmentVariable(SDK_PREFIX+"_USER_AGENT") ?? null;
             }
-            set { userAgent = value; }
+
+            set
+            {
+                userAgent = value;
+
+            }
         }
 
         /// <summary>
@@ -127,9 +127,13 @@ namespace AfterShipTracking
                 {
                     return proxy;
                 }
-                return Environment.GetEnvironmentVariable(SDK_PREFIX + "_PROXY") ?? "";
+                return Environment.GetEnvironmentVariable(SDK_PREFIX+"_PROXY") ?? "";
             }
-            set { proxy = value; }
+
+            set
+            {
+                proxy = value;
+            }
         }
 
         /// <summary>
@@ -143,9 +147,13 @@ namespace AfterShipTracking
                 {
                     return apiKey;
                 }
-                return Environment.GetEnvironmentVariable(SDK_PREFIX + "_API_KEY") ?? "";
+                return Environment.GetEnvironmentVariable(SDK_PREFIX+"_API_KEY") ?? "";
             }
-            set { apiKey = value; }
+
+            set
+            {
+                apiKey = value;
+            }
         }
 
         /// <summary>
@@ -159,9 +167,13 @@ namespace AfterShipTracking
                 {
                     return apiSecret;
                 }
-                return Environment.GetEnvironmentVariable(SDK_PREFIX + "_API_SECRET") ?? "";
+                return Environment.GetEnvironmentVariable(SDK_PREFIX+"_API_SECRET") ?? "";
             }
-            set { apiSecret = value; }
+
+            set
+            {
+                apiSecret = value;
+            }
         }
 
         /// <summary>
@@ -175,10 +187,13 @@ namespace AfterShipTracking
                 {
                     return authenticationType;
                 }
-                return Environment.GetEnvironmentVariable(SDK_PREFIX + "_AUTHENTICATION_TYPE")
-                    ?? AUTHENTICATION_TYPE_API_KEY;
+                return Environment.GetEnvironmentVariable(SDK_PREFIX+"_AUTHENTICATION_TYPE") ?? AUTHENTICATION_TYPE_API_KEY;
             }
-            set { authenticationType = value; }
+
+            set
+            {
+                authenticationType = value;
+            }
         }
     }
 }

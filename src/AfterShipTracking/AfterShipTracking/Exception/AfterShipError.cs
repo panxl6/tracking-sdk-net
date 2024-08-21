@@ -14,14 +14,8 @@ namespace AfterShipTracking
         protected string message;
         protected object responseBody;
 
-        public AfterShipError(
-            string message,
-            string errorCode,
-            int? statusCode,
-            int? metaCode,
-            object responseBody = null
-        )
-            : base(message)
+        public AfterShipError(string message, string errorCode, int? statusCode, int? metaCode, object responseBody = null)
+        : base(message)
         {
             this.metaCode = metaCode;
             this.message = message;

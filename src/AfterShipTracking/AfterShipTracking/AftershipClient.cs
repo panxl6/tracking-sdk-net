@@ -67,7 +67,6 @@ namespace AfterShipTracking
         public CourierService Courier { get; set; }
         public TrackingService Tracking { get; set; }
         public EstimatedDeliveryDateService EstimatedDeliveryDate { get; set; }
-
         public AfterShipClient(
             string domain = null,
             string apiKey = null,
@@ -82,8 +81,8 @@ namespace AfterShipTracking
         {
             Domain = domain ?? AfterShipConfiguration.Domain;
             ApiBase = Domain;
-            MaxRetry = maxRetry == 0 ? AfterShipConfiguration.MaxRetry : maxRetry;
-            Timeout = timeout == 0 ? AfterShipConfiguration.Timeout : timeout;
+            MaxRetry = maxRetry ==0 ? AfterShipConfiguration.MaxRetry:maxRetry;
+            Timeout = timeout ==0? AfterShipConfiguration.Timeout: timeout;
             UserAgent = userAgent ?? AfterShipConfiguration.UserAgent;
             Proxy = proxy ?? AfterShipConfiguration.Proxy;
             ApiKey = apiKey ?? AfterShipConfiguration.ApiKey;
@@ -94,16 +93,7 @@ namespace AfterShipTracking
 
             Authenticator authenticator = new Authenticator(ApiKey, ApiSecret, AuthenticationType);
 
-            HttpClient =
-                httpClient
-                ?? new SystemNetHttpClient(
-                    this.ApiBase,
-                    authenticator,
-                    this.MaxRetry,
-                    this.Timeout,
-                    this.UserAgent,
-                    this.Proxy
-                );
+            HttpClient = httpClient ?? new SystemNetHttpClient(this.ApiBase, authenticator, this.MaxRetry, this.Timeout, this.UserAgent,this.Proxy);
 
             Courier = new CourierService(HttpClient);
             Tracking = new TrackingService(HttpClient);
@@ -119,22 +109,15 @@ namespace AfterShipTracking
 
             if (this.Timeout < 0 || this.Timeout > 30000)
             {
-                throw ErrorCode.GenSDKError(
-                    ErrorCode.INVALID_OPTION,
-                    "timeout invalid, timeout must between 0 and 30000 (milliseconds)"
-                );
+                throw ErrorCode.GenSDKError(ErrorCode.INVALID_OPTION, "timeout invalid, timeout must between 0 and 30000 (milliseconds)");
             }
 
             if (this.MaxRetry < 0 || this.MaxRetry > 10)
             {
-                throw ErrorCode.GenSDKError(
-                    ErrorCode.INVALID_OPTION,
-                    "max retry invalid, max retry must between 0 and 10"
-                );
+                throw ErrorCode.GenSDKError(ErrorCode.INVALID_OPTION, "max retry invalid, max retry must between 0 and 10");
             }
 
-            string[] array =
-            {
+            string[] array = {
                 AfterShipConfiguration.AUTHENTICATION_TYPE_API_KEY,
                 AfterShipConfiguration.AUTHENTICATION_TYPE_AES,
                 AfterShipConfiguration.AUTHENTICATION_TYPE_RSA,
@@ -142,23 +125,14 @@ namespace AfterShipTracking
             var authenticationType = AuthenticationType;
             if (!array.Contains(authenticationType))
             {
-                throw ErrorCode.GenSDKError(
-                    ErrorCode.INVALID_OPTION,
-                    "Invalid option: authenticationType should be one of API_KEY, AES, RSA"
-                );
+                throw ErrorCode.GenSDKError(ErrorCode.INVALID_OPTION, "Invalid option: authenticationType should be one of API_KEY, AES, RSA");
             }
 
-            if (
-                authenticationType == AfterShipConfiguration.AUTHENTICATION_TYPE_AES
-                || authenticationType == AfterShipConfiguration.AUTHENTICATION_TYPE_AES
-            )
+            if (authenticationType == AfterShipConfiguration.AUTHENTICATION_TYPE_AES || authenticationType == AfterShipConfiguration.AUTHENTICATION_TYPE_AES)
             {
                 if (string.IsNullOrEmpty(ApiSecret))
                 {
-                    throw ErrorCode.GenSDKError(
-                        ErrorCode.INVALID_API_KEY,
-                        "Invalid option: apiSecret cannot be empty"
-                    );
+                    throw ErrorCode.GenSDKError(ErrorCode.INVALID_API_KEY, "Invalid option: apiSecret cannot be empty");
                 }
             }
         }

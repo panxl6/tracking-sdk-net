@@ -54,8 +54,8 @@ namespace AfterShipTracking
             // Enable support for TLS 1.2, as Tracking's API requires it. This should only be
             // necessary for .NET Framework 4.5 as more recent runtimes should have TLS 1.2 enabled
             // by default, but it can be disabled in some environments.
-            ServicePointManager.SecurityProtocol =
-                ServicePointManager.SecurityProtocol | SecurityProtocolType.Tls12;
+            ServicePointManager.SecurityProtocol = ServicePointManager.SecurityProtocol |
+                SecurityProtocolType.Tls12;
         }
 
         /// <summary>
@@ -71,12 +71,12 @@ namespace AfterShipTracking
         /// </param>
 
         public SystemNetHttpClient(
-            String baseUrl = null,
-            Authenticator authenticator = null,
-            int maxNetworkRetries = DefaultMaxNumberRetries,
-            int timeout = DefaultTimeout,
-            string userAgent = "",
-            string proxy = null
+         String baseUrl = null,
+         Authenticator authenticator = null,
+         int maxNetworkRetries = DefaultMaxNumberRetries,
+         int timeout = DefaultTimeout,
+         string userAgent = "",
+         string proxy = null
         )
         {
             if (string.IsNullOrEmpty(baseUrl))
@@ -126,19 +126,18 @@ namespace AfterShipTracking
         /// with default parameters.
         /// </summary>
         /// <returns>The new instance of the <see cref="System.Net.Http.HttpClient"/> class.</returns>
-        public static HttpClient BuildSystemNetHttpClient(
-            int timeoutMs = DefaultTimeout,
-            string proxyUrl = null
-        )
+        public static HttpClient BuildSystemNetHttpClient(int timeoutMs= DefaultTimeout, string proxyUrl = null)
         {
-            if (timeoutMs <= 0)
-            {
+            if (timeoutMs <=0) {
                 timeoutMs = DefaultTimeout;
             }
             TimeSpan timeout = TimeSpan.FromMilliseconds(timeoutMs);
             if (string.IsNullOrEmpty(proxyUrl))
             {
-                return new HttpClient { Timeout = timeout, };
+                return new HttpClient
+                {
+                    Timeout = timeout,
+                };
             }
             else
             {
@@ -153,10 +152,16 @@ namespace AfterShipTracking
                     UseProxy = true
                 };
 
+
                 //  HttpClient
-                return new HttpClient(handler) { Timeout = timeout, };
+                return new HttpClient(handler)
+                {
+                    Timeout = timeout,
+                };
+
             }
         }
+
 
         public Response MakeRequest(Request request)
         {
@@ -170,27 +175,27 @@ namespace AfterShipTracking
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<Response> MakeRequestAsync(Request request)
+        public async Task<Response> MakeRequestAsync(
+            Request request)
         {
             var (response, retries) = await this.SendHttpRequest(request).ConfigureAwait(false);
 
             var reader = new StreamReader(
-                await response.Content.ReadAsStreamAsync().ConfigureAwait(false)
-            );
+                await response.Content.ReadAsStreamAsync().ConfigureAwait(false));
 
             return new Response(
                 response.StatusCode,
                 response.Headers,
-                await reader.ReadToEndAsync().ConfigureAwait(false)
-            )
+                await reader.ReadToEndAsync().ConfigureAwait(false))
             {
                 NumRetries = retries,
             };
         }
 
+
+
         private async Task<(HttpResponseMessage responseMessage, int retries)> SendHttpRequest(
-            Request request
-        )
+            Request request)
         {
             Exception? requestException;
             HttpResponseMessage? response = null;
@@ -199,12 +204,9 @@ namespace AfterShipTracking
             while (true)
             {
                 requestException = null;
-                if (retry > this.MaxNetworkRetries)
+                 if (retry > this.MaxNetworkRetries)
                 {
-                    requestException = ErrorCode.GenSDKError(
-                        ErrorCode.TIMED_OUT,
-                        ErrorCode.TIMED_OUT
-                    );
+                    requestException = ErrorCode.GenSDKError(ErrorCode.TIMED_OUT, ErrorCode.TIMED_OUT);
                     break;
                 }
                 var httpRequest = this.BuildRequestMessage(request);
@@ -216,36 +218,27 @@ namespace AfterShipTracking
                 // }
                 try
                 {
-                    response = await this.httpClient.SendAsync(httpRequest).ConfigureAwait(false);
+                    response = await this.httpClient.SendAsync(httpRequest)
+                        .ConfigureAwait(false);
                 }
                 catch (HttpRequestException)
                 {
-                    requestException = ErrorCode.GenSDKError(
-                        ErrorCode.INTERNAL_ERROR,
-                        ErrorCode.INTERNAL_ERROR
-                    );
-                    ;
+                    requestException = ErrorCode.GenSDKError(ErrorCode.INTERNAL_ERROR, ErrorCode.INTERNAL_ERROR); ;
                 }
                 catch (OperationCanceledException)
                 {
-                    requestException = ErrorCode.GenSDKError(
-                        ErrorCode.TIMED_OUT,
-                        ErrorCode.TIMED_OUT
-                    );
+                    requestException = ErrorCode.GenSDKError(ErrorCode.TIMED_OUT,ErrorCode.TIMED_OUT);
                 }
 
                 stopwatch.Stop();
 
                 // SetRateLimit(this.rateLimit, response);
 
-                if (
-                    !this.ShouldRetry(
-                        retry,
-                        requestException != null,
-                        response?.StatusCode,
-                        response?.Headers
-                    )
-                )
+                if (!this.ShouldRetry(
+                    retry,
+                    requestException != null,
+                    response?.StatusCode,
+                    response?.Headers))
                 {
                     break;
                 }
@@ -262,12 +255,12 @@ namespace AfterShipTracking
             return (response, retry);
         }
 
+
         private bool ShouldRetry(
             int numRetries,
             bool error,
             HttpStatusCode? statusCode,
-            HttpHeaders headers
-        )
+            HttpHeaders headers)
         {
             // Do not retry if we are out of retries.
             if (numRetries >= this.MaxNetworkRetries)
@@ -280,6 +273,7 @@ namespace AfterShipTracking
             {
                 return true;
             }
+
 
             // Retry on 500, 503, and other internal errors.
             if (statusCode.HasValue && ((int)statusCode.Value >= 500))
@@ -297,9 +291,9 @@ namespace AfterShipTracking
             // query
             if (request.QueryParams != null && request.QueryParams.Count > 0)
             {
-                url +=
-                    "?" + string.Join("&", request.QueryParams.Select(p => $"{p.Key}={p.Value}"));
+                url += "?" + string.Join("&", request.QueryParams.Select(p => $"{p.Key}={p.Value}"));
             }
+
 
             HttpRequestMessage requestMessage = new HttpRequestMessage(request.Method, url);
 
@@ -324,10 +318,9 @@ namespace AfterShipTracking
             if (request.Body != null)
             {
                 requestMessage.Content = new StringContent(request.Body, Encoding.UTF8);
-                requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(
-                    "application/json"
-                );
+                requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             }
+
 
             // compute signature
             this.authenticator.Sign(requestMessage);
@@ -341,13 +334,13 @@ namespace AfterShipTracking
             double jitter = delay * (new Random().NextDouble() - 0.5);
             int finalDelay = (int)(Math.Max(1, delay + jitter) * 1000);
             return TimeSpan.FromMilliseconds(finalDelay);
+
         }
+
 
         public Dictionary<string, string> BuildDefaultHeader(string userAgent)
         {
-            userAgent = string.IsNullOrEmpty(userAgent)
-                ? AfterShipConfiguration.DEFAULT_USER_AGENT
-                : userAgent;
+            userAgent = string.IsNullOrEmpty(userAgent) ?  AfterShipConfiguration.DEFAULT_USER_AGENT: userAgent;
             Dictionary<string, string> headers = new();
             headers.Add("content-type", "application/json");
             headers.Add("date", DateTime.UtcNow.ToString("r"));
@@ -368,10 +361,7 @@ namespace AfterShipTracking
                 return;
             }
 
-            if (
-                response.Headers.TryGetValues("x-ratelimit-reset", out var resetValues)
-                && !string.IsNullOrEmpty(resetValues.FirstOrDefault())
-            )
+            if (response.Headers.TryGetValues("x-ratelimit-reset", out var resetValues) && !string.IsNullOrEmpty(resetValues.FirstOrDefault()))
             {
                 if (long.TryParse(resetValues.First(), out var reset))
                 {
@@ -379,10 +369,7 @@ namespace AfterShipTracking
                 }
             }
 
-            if (
-                response.Headers.TryGetValues("x-ratelimit-limit", out var limitValues)
-                && !string.IsNullOrEmpty(limitValues.FirstOrDefault())
-            )
+            if (response.Headers.TryGetValues("x-ratelimit-limit", out var limitValues) && !string.IsNullOrEmpty(limitValues.FirstOrDefault()))
             {
                 if (int.TryParse(limitValues.First(), out var limit))
                 {
@@ -390,10 +377,7 @@ namespace AfterShipTracking
                 }
             }
 
-            if (
-                response.Headers.TryGetValues("x-ratelimit-remaining", out var remainingValues)
-                && !string.IsNullOrEmpty(remainingValues.FirstOrDefault())
-            )
+            if (response.Headers.TryGetValues("x-ratelimit-remaining", out var remainingValues) && !string.IsNullOrEmpty(remainingValues.FirstOrDefault()))
             {
                 if (int.TryParse(remainingValues.First(), out var remaining))
                 {
@@ -406,6 +390,7 @@ namespace AfterShipTracking
         {
             return rateLimit?.IsExceeded() ?? false;
         }
+
     }
 
     public class RateLimit
@@ -420,3 +405,4 @@ namespace AfterShipTracking
         }
     }
 }
+

@@ -16,37 +16,26 @@ namespace AfterShipTracking
     {
         [EnumMember(Value = "amazon-group")]
         AmazonGroup,
-
         [EnumMember(Value = "fedex-group")]
         FedexGroup,
-
         [EnumMember(Value = "toll-group")]
         TollGroup,
-
         [EnumMember(Value = "taqbin-group")]
         TaqbinGroup,
-
         [EnumMember(Value = "tnt-group")]
         TntGroup,
-
         [EnumMember(Value = "cj-group")]
         CjGroup,
-
         [EnumMember(Value = "hermes-group")]
         HermesGroup,
-
         [EnumMember(Value = "dpd-group")]
         DpdGroup,
-
         [EnumMember(Value = "gls-group")]
         GlsGroup,
-
         [EnumMember(Value = "dhl-group")]
         DhlGroup,
-
         [EnumMember(Value = "fastway-group")]
         FastwayGroup,
-
         [EnumMember(Value = "asendia-group")]
         AsendiaGroup,
     }

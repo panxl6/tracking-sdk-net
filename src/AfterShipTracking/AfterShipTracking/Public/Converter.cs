@@ -11,10 +11,7 @@ namespace AfterShipTracking
 
     public static class Converter
     {
-        public static TTarget Convert<TTarget, TSource>(
-            TSource source,
-            IAdapter<TTarget, TSource> adapter
-        )
+        public static TTarget Convert<TTarget, TSource>(TSource source, IAdapter<TTarget, TSource> adapter)
         {
             return adapter.Adapt(source);
         }

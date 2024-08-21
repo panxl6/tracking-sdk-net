@@ -47,11 +47,7 @@ namespace AfterShipTracking
                 rsa.ImportFromPem(privateKeyPem);
 
                 // sign data with SHA256
-                byte[] signature = rsa.SignData(
-                    dataBytes,
-                    HashAlgorithmName.SHA256,
-                    RSASignaturePadding.Pss
-                );
+                byte[] signature = rsa.SignData(dataBytes, HashAlgorithmName.SHA256, RSASignaturePadding.Pss);
 
                 // convert to Base64 string
                 string base64Signature = Convert.ToBase64String(signature);

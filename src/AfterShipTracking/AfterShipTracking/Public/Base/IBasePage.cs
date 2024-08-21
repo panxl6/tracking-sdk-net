@@ -5,5 +5,8 @@
 
 namespace AfterShipTracking
 {
-    public interface IBasePage { }
+    public interface IBasePage
+    {
+
+    }
 }

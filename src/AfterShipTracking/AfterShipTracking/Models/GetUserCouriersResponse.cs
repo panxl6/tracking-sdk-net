@@ -9,22 +9,23 @@ using Newtonsoft.Json;
 namespace AfterShipTracking
 {
     /// <summary>
-    ///
+    /// 
     /// </summary>
-    public class GetUserCouriersResponse
+    public class  GetUserCouriersResponse
     {
         /// <summary>
         ///  Total Total count of courier objects
         /// </summary>
         [JsonProperty("total")]
-        public int? Total { get; set; }
-
+        public int?  Total { get; set; }
         /// <summary>
         ///  Couriers Array of  object.
         /// </summary>
         [JsonProperty("couriers")]
-        public Courier?[] Couriers { get; set; }
-
-        public GetUserCouriersResponse() { }
+        public Courier? [] Couriers { get; set; }
+        public GetUserCouriersResponse()
+        {
+        }
     }
+    
 }

@@ -28,11 +28,7 @@ namespace AfterShipTracking
         /// <param name="queryParams">The initial query parameters.</param>
         /// <param name="headerParams">The initial header parameters.</param>
         /// <param name="body">The initial body content.</param>
-        public BaseOptions(
-            List<KeyValuePair<string, string>> queryParams,
-            List<KeyValuePair<string, string>> headerParams,
-            string body
-        )
+        public BaseOptions(List<KeyValuePair<string, string>> queryParams, List<KeyValuePair<string, string>> headerParams, string body)
         {
             this.queryParams = queryParams;
             this.headerParams = headerParams;
@@ -44,8 +40,14 @@ namespace AfterShipTracking
         /// </summary>
         public List<KeyValuePair<string, string>> QueryParams
         {
-            get { return queryParams; }
-            set { queryParams = value; }
+            get
+            {
+                return queryParams;
+            }
+            set
+            {
+                queryParams = value;
+            }
         }
 
         /// <summary>
@@ -53,8 +55,14 @@ namespace AfterShipTracking
         /// </summary>
         public List<KeyValuePair<string, string>> HeaderParams
         {
-            get { return headerParams; }
-            set { headerParams = value; }
+            get
+            {
+                return headerParams;
+            }
+            set
+            {
+                headerParams = value;
+            }
         }
 
         /// <summary>
@@ -114,3 +122,4 @@ namespace AfterShipTracking
         }
     }
 }
+

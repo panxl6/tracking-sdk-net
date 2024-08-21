@@ -16,28 +16,20 @@ namespace AfterShipTracking
     {
         [EnumMember(Value = "Pending")]
         Pending,
-
         [EnumMember(Value = "InfoReceived")]
         Inforeceived,
-
         [EnumMember(Value = "InTransit")]
         Intransit,
-
         [EnumMember(Value = "OutForDelivery")]
         Outfordelivery,
-
         [EnumMember(Value = "AttemptFail")]
         Attemptfail,
-
         [EnumMember(Value = "Delivered")]
         Delivered,
-
         [EnumMember(Value = "AvailableForPickup")]
         Availableforpickup,
-
         [EnumMember(Value = "Exception")]
         Exception,
-
         [EnumMember(Value = "Expired")]
         Expired,
     }
