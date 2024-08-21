@@ -10,14 +10,6 @@ namespace AfterShipTracking
     /// <summary>
     /// Description
     /// </summary>
-    public class GetUserCouriersOptions : BaseOptions
-    {
-        public GetUserCouriersOptions() { }
-    }
-
-    /// <summary>
-    /// Description
-    /// </summary>
     public class DetectCourierOptions : BaseOptions
     {
         public DetectCourierOptions() { }
@@ -42,5 +34,13 @@ namespace AfterShipTracking
     public class GetAllCouriersOptions : BaseOptions
     {
         public GetAllCouriersOptions() { }
+    }
+
+    /// <summary>
+    /// Description
+    /// </summary>
+    public class GetUserCouriersOptions : BaseOptions
+    {
+        public GetUserCouriersOptions() { }
     }
 }

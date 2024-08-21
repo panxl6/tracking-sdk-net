@@ -14,27 +14,13 @@ namespace AfterShipTracking
     public class DetectCourierRequest
     {
         /// <summary>
-        ///  Tracking Detect courier request
-        /// </summary>
-        [JsonProperty("tracking", NullValueHandling = NullValueHandling.Ignore)]
-        public TrackingDetectCourierRequest? Tracking { get; set; }
-
-        public DetectCourierRequest() { }
-    }
-
-    /// <summary>
-    ///
-    /// </summary>
-    public class TrackingDetectCourierRequest
-    {
-        /// <summary>
         ///  TrackingNumber Tracking number of a shipment.
         /// </summary>
         [JsonProperty("tracking_number")]
         public string TrackingNumber { get; set; }
 
         /// <summary>
-        ///  Slug If not specified, Aftership will automatically detect the courier based on the tracking number format and your . Use array or comma separated to input a list of couriers for auto detect. Cannot be used with slug_group at the same time.
+        ///  Slug If not specified, Aftership will automatically detect the courier based on the tracking number format and your . Use array to input a list of couriers for auto detect. Cannot be used with slug_group at the same time.
         /// </summary>
         [JsonProperty("slug", NullValueHandling = NullValueHandling.Ignore)]
         public string?[] Slug { get; set; }
@@ -99,6 +85,6 @@ namespace AfterShipTracking
         [JsonProperty("destination_country_iso3", NullValueHandling = NullValueHandling.Ignore)]
         public string? DestinationCountryIso3 { get; set; }
 
-        public TrackingDetectCourierRequest() { }
+        public DetectCourierRequest() { }
     }
 }

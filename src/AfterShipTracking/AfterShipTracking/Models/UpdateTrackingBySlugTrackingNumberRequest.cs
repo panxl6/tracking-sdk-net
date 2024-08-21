@@ -14,20 +14,6 @@ namespace AfterShipTracking
     public class UpdateTrackingBySlugTrackingNumberRequest
     {
         /// <summary>
-        ///  Tracking
-        /// </summary>
-        [JsonProperty("tracking", NullValueHandling = NullValueHandling.Ignore)]
-        public TrackingUpdateTrackingBySlugTrackingNumberRequest? Tracking { get; set; }
-
-        public UpdateTrackingBySlugTrackingNumberRequest() { }
-    }
-
-    /// <summary>
-    ///
-    /// </summary>
-    public class TrackingUpdateTrackingBySlugTrackingNumberRequest
-    {
-        /// <summary>
         ///  Smses The phone number(s) to receive sms notifications.  Supports up to 3 phone numbers.
         /// </summary>
         [JsonProperty("smses", NullValueHandling = NullValueHandling.Ignore)]
@@ -67,7 +53,7 @@ namespace AfterShipTracking
         ///  CustomFields Custom fields that accept an object with string field. In order to protect the privacy of your customers, do not include any
         /// </summary>
         [JsonProperty("custom_fields", NullValueHandling = NullValueHandling.Ignore)]
-        public Dictionary<string, string>? CustomFields { get; set; }
+        public CustomFieldsUpdateTrackingBySlugTrackingNumberRequest? CustomFields { get; set; }
 
         /// <summary>
         ///  Note Text field for the note
@@ -82,7 +68,7 @@ namespace AfterShipTracking
         public string? Language { get; set; }
 
         /// <summary>
-        ///  OrderPromisedDeliveryDate The promised delivery date of the order. It uses the format YYYY-MM-DD. This has no timezone and uses whatever date you provide. Since other EDDs use the shipment recipient’s timezone, we suggest following the same logic here.
+        ///  OrderPromisedDeliveryDate The promised delivery date of the order. It uses the formats:- YYYY-MM-DD- YYYY-MM-DDTHH:mm:ss- YYYY-MM-DDTHH:mm:ssZ
         /// </summary>
         [JsonProperty("order_promised_delivery_date", NullValueHandling = NullValueHandling.Ignore)]
         public string? OrderPromisedDeliveryDate { get; set; }
@@ -177,6 +163,14 @@ namespace AfterShipTracking
         [JsonProperty("shipping_method", NullValueHandling = NullValueHandling.Ignore)]
         public string? ShippingMethod { get; set; }
 
-        public TrackingUpdateTrackingBySlugTrackingNumberRequest() { }
+        public UpdateTrackingBySlugTrackingNumberRequest() { }
+    }
+
+    /// <summary>
+    ///
+    /// </summary>
+    public class CustomFieldsUpdateTrackingBySlugTrackingNumberRequest
+    {
+        public CustomFieldsUpdateTrackingBySlugTrackingNumberRequest() { }
     }
 }

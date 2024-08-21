@@ -18,7 +18,7 @@ namespace AfterShipTracking
 
         public PredictBatchResponse PredictBatch(PredictBatchOptions? options = null)
         {
-            string path = $"/tracking/2024-04/estimated-delivery-date/predict-batch";
+            string path = $"/tracking/2024-07/estimated-delivery-date/predict-batch";
             Request request = new Request(HttpMethod.Post, path, options);
 
             var response = this.HttpClient.MakeRequest(request);

@@ -14,20 +14,6 @@ namespace AfterShipTracking
     public class UpdateTrackingByIdRequest
     {
         /// <summary>
-        ///  Tracking
-        /// </summary>
-        [JsonProperty("tracking", NullValueHandling = NullValueHandling.Ignore)]
-        public TrackingUpdateTrackingByIdRequest? Tracking { get; set; }
-
-        public UpdateTrackingByIdRequest() { }
-    }
-
-    /// <summary>
-    ///
-    /// </summary>
-    public class TrackingUpdateTrackingByIdRequest
-    {
-        /// <summary>
         ///  Smses The phone number(s) to receive sms notifications.  Input `[]` to clear the value of this field. Supports up to 3 phone numbers.
         /// </summary>
         [JsonProperty("smses", NullValueHandling = NullValueHandling.Ignore)]
@@ -82,7 +68,7 @@ namespace AfterShipTracking
         public string? Language { get; set; }
 
         /// <summary>
-        ///  OrderPromisedDeliveryDate The promised delivery date of the order. It uses the format YYYY-MM-DD. This has no timezone and uses whatever date you provide. Since other EDDs use the shipment recipient’s timezone, we suggest following the same logic here.
+        ///  OrderPromisedDeliveryDate The promised delivery date of the order. It uses the formats:- YYYY-MM-DD- YYYY-MM-DDTHH:mm:ss- YYYY-MM-DDTHH:mm:ssZ
         /// </summary>
         [JsonProperty("order_promised_delivery_date", NullValueHandling = NullValueHandling.Ignore)]
         public string? OrderPromisedDeliveryDate { get; set; }
@@ -243,6 +229,6 @@ namespace AfterShipTracking
         [JsonProperty("shipping_method", NullValueHandling = NullValueHandling.Ignore)]
         public string? ShippingMethod { get; set; }
 
-        public TrackingUpdateTrackingByIdRequest() { }
+        public UpdateTrackingByIdRequest() { }
     }
 }

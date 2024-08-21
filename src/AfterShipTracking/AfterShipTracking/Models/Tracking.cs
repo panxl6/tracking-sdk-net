@@ -20,6 +20,12 @@ namespace AfterShipTracking
         public string? Id { get; set; }
 
         /// <summary>
+        ///  LegacyId The length of the tracking ID has been increased from 24 characters to 32 characters. We will use the legacy_id field to store the original 24-character tracking ID to maintain compatibility with existing data. Therefore, all tracking endpoints will continue to work with the legacy_id field as before.
+        /// </summary>
+        [JsonProperty("legacy_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string? LegacyId { get; set; }
+
+        /// <summary>
         ///  CreatedAt The date and time the shipment was imported or added to AfterShip. It uses the format `YYYY-MM-DDTHH:mm:ssZ` for the timezone GMT +0.
         /// </summary>
         [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
@@ -203,16 +209,10 @@ namespace AfterShipTracking
         public string? ShipmentType { get; set; }
 
         /// <summary>
-        ///  ShipmentWeight Shipment weight provied by carrier.
+        ///  ShipmentWeight The shipment_weight field represents the total weight of the shipment. In scenarios where the carrier does not provide this information, you can provide the weight to AfterShip. We will prioritize the data provided by the carrier, if available. The shipment weight will be included in the Response and accessed through the GET API, Webhook, and CSV export. It will also be displayed on the AfterShip Tracking admin. Additionally, it plays a significant role in error-free shipment handling and carbon emission calculations, ensuring accurate and informed decision-making
         /// </summary>
         [JsonProperty("shipment_weight", NullValueHandling = NullValueHandling.Ignore)]
-        public double? ShipmentWeight { get; set; }
-
-        /// <summary>
-        ///  ShipmentWeightUnit Weight unit provied by carrier.
-        /// </summary>
-        [JsonProperty("shipment_weight_unit", NullValueHandling = NullValueHandling.Ignore)]
-        public string? ShipmentWeightUnit { get; set; }
+        public ShipmentWeightTracking? ShipmentWeight { get; set; }
 
         /// <summary>
         ///  SignedBy Signed by information for delivered shipment.
@@ -221,7 +221,7 @@ namespace AfterShipTracking
         public string? SignedBy { get; set; }
 
         /// <summary>
-        ///  Smses The phone number(s) to receive sms notifications.  Phone number should begin with `+` and `Area Code` before phone number. Comma separated for multiple values.
+        ///  Smses The phone number(s) to receive sms notifications.  Phone number should begin with `+` and `Area Code` before phone number.
         /// </summary>
         [JsonProperty("smses", NullValueHandling = NullValueHandling.Ignore)]
         public string?[] Smses { get; set; }
@@ -287,13 +287,13 @@ namespace AfterShipTracking
         public Checkpoint?[] Checkpoints { get; set; }
 
         /// <summary>
-        ///  SubscribedSmses Phone number(s) subscribed to receive sms notifications. Comma separated for multiple values
+        ///  SubscribedSmses Phone number(s) subscribed to receive sms notifications.
         /// </summary>
         [JsonProperty("subscribed_smses", NullValueHandling = NullValueHandling.Ignore)]
         public string?[] SubscribedSmses { get; set; }
 
         /// <summary>
-        ///  SubscribedEmails Email address(es) subscribed to receive email notifications. Comma separated for multiple values
+        ///  SubscribedEmails Email address(es) subscribed to receive email notifications.
         /// </summary>
         [JsonProperty("subscribed_emails", NullValueHandling = NullValueHandling.Ignore)]
         public string?[] SubscribedEmails { get; set; }
@@ -305,7 +305,7 @@ namespace AfterShipTracking
         public bool? ReturnToSender { get; set; }
 
         /// <summary>
-        ///  OrderPromisedDeliveryDate The promised delivery date of the order. It uses the format `YYYY-MM-DD`. This has no timezone and uses whatever date you provide.
+        ///  OrderPromisedDeliveryDate The promised delivery date of the order. It uses the formats:- YYYY-MM-DD- YYYY-MM-DDTHH:mm:ss- YYYY-MM-DDTHH:mm:ssZ
         /// </summary>
         [JsonProperty("order_promised_delivery_date", NullValueHandling = NullValueHandling.Ignore)]
         public string? OrderPromisedDeliveryDate { get; set; }
@@ -490,7 +490,33 @@ namespace AfterShipTracking
         [JsonProperty("signature_requirement", NullValueHandling = NullValueHandling.Ignore)]
         public string? SignatureRequirement { get; set; }
 
+        /// <summary>
+        ///  DeliveryLocationType The delivery location type represents the secure area where the carrier leaves the package, such as a safe place, locker, mailbox, front porch, etc. This information helps ensure the shipment reaches the intended recipient efficiently, minimizing the risk of theft or damage.
+        /// </summary>
+        [JsonProperty("delivery_location_type", NullValueHandling = NullValueHandling.Ignore)]
+        public string? DeliveryLocationType { get; set; }
+
         public Tracking() { }
+    }
+
+    /// <summary>
+    ///
+    /// </summary>
+    public class ShipmentWeightTracking
+    {
+        /// <summary>
+        ///  Unit The unit in which the value field is expressed.
+        /// </summary>
+        [JsonProperty("unit", NullValueHandling = NullValueHandling.Ignore)]
+        public string? Unit { get; set; }
+
+        /// <summary>
+        ///  Value The total amount of shipment weight.
+        /// </summary>
+        [JsonProperty("value", NullValueHandling = NullValueHandling.Ignore)]
+        public double? Value { get; set; }
+
+        public ShipmentWeightTracking() { }
     }
 
     /// <summary>

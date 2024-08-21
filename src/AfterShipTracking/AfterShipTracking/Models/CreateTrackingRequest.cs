@@ -14,20 +14,6 @@ namespace AfterShipTracking
     public class CreateTrackingRequest
     {
         /// <summary>
-        ///  Tracking
-        /// </summary>
-        [JsonProperty("tracking")]
-        public TrackingCreateTrackingRequest Tracking { get; set; }
-
-        public CreateTrackingRequest() { }
-    }
-
-    /// <summary>
-    ///
-    /// </summary>
-    public class TrackingCreateTrackingRequest
-    {
-        /// <summary>
         ///  TrackingNumber Tracking number of a shipment.Duplicated tracking numbers, tracking numbers with invalid tracking number format will not be accepted.We only accept tracking numbers with length from 4 to 100We currently support the following characters in a tracking number:- A - Z- 0 - 9- `-` (Hyphen)- . (Period)- _ (Underscore)- / (Slash)
         /// </summary>
         [JsonProperty("tracking_number")]
@@ -70,7 +56,7 @@ namespace AfterShipTracking
         public string? Language { get; set; }
 
         /// <summary>
-        ///  OrderPromisedDeliveryDate The promised delivery date of the order. It uses the format YYYY-MM-DD. This has no timezone and uses whatever date you provide. Since other EDDs use the shipment recipient’s timezone, we suggest following the same logic here.
+        ///  OrderPromisedDeliveryDate The promised delivery date of the order. It uses the formats:- YYYY-MM-DD- YYYY-MM-DDTHH:mm:ss- YYYY-MM-DDTHH:mm:ssZ
         /// </summary>
         [JsonProperty("order_promised_delivery_date", NullValueHandling = NullValueHandling.Ignore)]
         public string? OrderPromisedDeliveryDate { get; set; }
@@ -112,13 +98,13 @@ namespace AfterShipTracking
         public string? TrackingShipDate { get; set; }
 
         /// <summary>
-        ///  Emails Email address(es) to receive email notifications. Accept either array or comma separated as input. Supports up to 3 email addresses.
+        ///  Emails Email address(es) to receive email notifications. Accept either array. Supports up to 3 email addresses.
         /// </summary>
         [JsonProperty("emails", NullValueHandling = NullValueHandling.Ignore)]
         public string?[] Emails { get; set; }
 
         /// <summary>
-        ///  Smses The phone number(s) to receive sms notifications.  Enter `+` andarea `code before` phone number. Accept either array or comma separated as input. Supports up to 3 phone numbers.
+        ///  Smses The phone number(s) to receive sms notifications.  Enter `+` andarea `code before` phone number. Accept either array. Supports up to 3 phone numbers.
         /// </summary>
         [JsonProperty("smses", NullValueHandling = NullValueHandling.Ignore)]
         public string?[] Smses { get; set; }
@@ -235,7 +221,7 @@ namespace AfterShipTracking
         ///  NextCouriers If a shipment has multiple carriers, you can use the next_couriers field to tell AfterShip who the second carrier is. This is useful if the first carrier does not send us this information.
         /// </summary>
         [JsonProperty("next_couriers", NullValueHandling = NullValueHandling.Ignore)]
-        public NextCouriersTrackingCreateTrackingRequest?[] NextCouriers { get; set; }
+        public NextCouriersCreateTrackingRequest?[] NextCouriers { get; set; }
 
         /// <summary>
         ///  TrackingOriginCountry (Legacy) Replaced by `origin_country_iso3`. Additional field required by some carriers to retrieve the tracking info. The origin country/region of the shipment. Refer to our article on  for more details.
@@ -273,13 +259,13 @@ namespace AfterShipTracking
         [JsonProperty("shipping_method", NullValueHandling = NullValueHandling.Ignore)]
         public string? ShippingMethod { get; set; }
 
-        public TrackingCreateTrackingRequest() { }
+        public CreateTrackingRequest() { }
     }
 
     /// <summary>
     ///
     /// </summary>
-    public class NextCouriersTrackingCreateTrackingRequest
+    public class NextCouriersCreateTrackingRequest
     {
         /// <summary>
         ///  Slug
@@ -293,6 +279,6 @@ namespace AfterShipTracking
         [JsonProperty("tracking_number")]
         public string TrackingNumber { get; set; }
 
-        public NextCouriersTrackingCreateTrackingRequest() { }
+        public NextCouriersCreateTrackingRequest() { }
     }
 }

@@ -65,8 +65,6 @@ namespace AfterShipTracking
         public IHttpClient HttpClient { get; }
 
         public EstimatedDeliveryDateService EstimatedDeliveryDate { get; set; }
-        public LastCheckpointService LastCheckpoint { get; set; }
-        public NotificationService Notification { get; set; }
         public TrackingService Tracking { get; set; }
         public CourierService Courier { get; set; }
 
@@ -108,8 +106,6 @@ namespace AfterShipTracking
                 );
 
             EstimatedDeliveryDate = new EstimatedDeliveryDateService(HttpClient);
-            LastCheckpoint = new LastCheckpointService(HttpClient);
-            Notification = new NotificationService(HttpClient);
             Tracking = new TrackingService(HttpClient);
             Courier = new CourierService(HttpClient);
         }
